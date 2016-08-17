@@ -187,6 +187,9 @@ public class BaseDirectoryServiceFactory implements DirectoryServiceFactory
     SchemaLoader loader = new LdifSchemaLoader( schemaRepository );
     SchemaManager schemaManager = new DefaultSchemaManager( loader );
 
+    // We need the NIS schema to test PAM authentication with posixGroups
+    schemaManager.enable("nis");
+
     // We have to load the schema now, otherwise we won't be able
     // to initialize the Partitions, as we won't be able to parse
     // and normalize their suffix Dn
