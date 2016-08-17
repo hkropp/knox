@@ -41,21 +41,8 @@ public class KnoxPamRealmTest {
     KnoxPamRealm realm = new KnoxPamRealm();
     realm.setService("sshd");                       // pam settings being used: /etc/pam.d/sshd
 
-    /*
-     * Does obfuscate the password but not work in IDE: http://stackoverflow.com/questions/10819469/hide-input-on-command-line
-     */
-    //Console console = System.console();
-    //String username = console.readLine("username: ");
-    //String password = new String(console.readPassword("password: "));
-
-
-    // read username/password from console
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("username: ");
-    String username = scanner.next();
-
-    System.out.print("password: ");
-    String password = scanner.next();
+    String username = System.getenv("PAMUSER");
+    String password = System.getenv("PAMPASS");
 
     // mock shiro auth token
     UsernamePasswordToken authToken = createMock(UsernamePasswordToken.class);
